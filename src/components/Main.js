@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../redux/action";
 import { removetoCart } from "../redux/action";
@@ -11,24 +11,14 @@ function Main() {
   const ans = answer.productname;
   console.log("data in main component from saga", answer.productname);
   const dispatch = useDispatch();
-  const product = {
-    name: "Iphone-13",
-    price: "58,990",
-    color: "white",
-  };
+
+  useEffect(() => {
+    dispatch(productList());
+  }, []);
   return (
     <div className="Main">
-      <button type="submit" onClick={() => dispatch(addToCart(product))}>
-        Add to Cart
-      </button>
-      <button type="submit" onClick={() => dispatch(removetoCart(product))}>
-        Remove from Cart
-      </button>
       <button type="submit" onClick={() => dispatch(emptyCart())}>
         Empty Cart
-      </button>
-      <button type="submit" onClick={() => dispatch(productList())}>
-        Get Product List
       </button>
       <div className="product-container">
         {ans.map((item) => (
@@ -43,6 +33,12 @@ function Main() {
             <div>Category:{item.category}</div>
             <div>Price:{item.price}</div>
             <div>Colour:{item.color}</div>
+            <button type="submit" onClick={() => dispatch(addToCart(item))}>
+              Add To Cart{" "}
+            </button>
+            <button type="submit" onClick={() => dispatch(removetoCart(item.id))}>
+              Remove From Cart{" "}
+            </button>
           </div>
         ))}
       </div>

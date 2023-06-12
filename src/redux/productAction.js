@@ -1,7 +1,12 @@
-import { PRODUCTLIST } from "./constant";
-export const productList = (data) => {
+import { PRODUCTLIST, PRODUCTSEARCH } from "./constant";
+export const productList = () => {
   return {
     type: PRODUCTLIST,
-    payload: data,
+  };
+};
+export const productSearch = (query) => {
+  return {
+    type: PRODUCTSEARCH,
+    payload: query,
   };
 };

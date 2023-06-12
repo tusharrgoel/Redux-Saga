@@ -12,11 +12,12 @@ export const cartItems = (state = initialState, action) => {
         noofItems: state.noofItems + 1,
       };
     case REMOVETOCART:
+      const remain = state.cartproducts.filter(
+        (item) => item.id !== action.payload
+      );
       return {
-        cartproducts: state.cartproducts.filter(
-          (item) => item !== action.payload
-        ),
-        noofItems: state.noofItems - 1,
+        cartproducts: remain,
+        noofItems: remain.length,
       };
     case EMPTYCART:
       return {
